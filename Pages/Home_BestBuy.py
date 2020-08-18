@@ -8,7 +8,7 @@ class Home:
     shop_link = (By.CSS_SELECTOR, "span[data-automation='x-shop']")
     shop_sub_link = (By.XPATH, "//div[@class='flyoutMenu_IfVpR active_2JcBh nav-item-shop']/div/ul/li")
     appliance_link = (By.LINK_TEXT, "Appliances")
-    output_text = (By.CSS_SELECTOR, "h1[class='title_3A6Uh]'")
+    output_text = (By.CSS_SELECTOR, "h1[class='title_3A6Uh']")
 
     def __init__(self, driver):
         self.driver = driver
