@@ -1,11 +1,16 @@
 import time
 
+from selenium.webdriver import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait as wait
+from selenium.webdriver.support import expected_conditions as EC
 from Pages.Home_BestBuy import Home
+from Pages.Brands_BestBuy import Brands
 from Utilities.BaseClass import BaseClass
 
 
 class TestBestBuyHome(BaseClass):
-    def test_homepage(self):
+
+    def test_home_page(self):
         home = Home(self.driver)
         # home.get_home_page_logo().click()
         home.get_shop_link().click()
@@ -16,10 +21,6 @@ class TestBestBuyHome(BaseClass):
             print("Link Name: ", s_link_name)
             if s_link_name == 'Appliances':
                 home.get_appliances_link().click()
-                # print(self.driver.title)
-                # time.sleep(4)
-                # appliance_window = self.driver.window_handles("Appliances")
-                # self.driver.switch_to.window(appliance_window)
                 time.sleep(4)
                 output = home.get_appliances_output_text().text
                 print(output)
@@ -27,3 +28,38 @@ class TestBestBuyHome(BaseClass):
                 break
 
         home.get_home_page_logo().click()
+        time.sleep(4)
+    # break
+
+    def test_brand_page(self):
+
+        brand_page = Brands(self.driver)
+        brand_page.get_brand_link().click()
+
+        brands = brand_page.get_brand_sub_link()
+        for brand in brands:
+            brand_names = brand.find_element_by_xpath('span').text
+            if brand_names == "P Q R S":
+
+                add = brand_page.get_samsung_link()
+
+                action = ActionChains(self.driver)
+                action.move_to_element(add).perform()
+                submenu = wait(self.driver, 10).until(EC.element_to_be_clickable(brand_page.samsung_link))
+                submenu.click()
+
+                pqrs = brand_page.get_pqrs_link()
+                # time.sleep(3)
+                for sam in pqrs:
+                    sub_brand_name = sam.find_element_by_xpath("a").text
+                    if sub_brand_name == "Samsung":
+                        brand_page.get_samsung().click()
+                        time.sleep(4)
+                        output = brand_page.get_samsung_out().text
+
+                        assert "Samsung" == output
+                        break
+
+                brand_page.get_brand_page_logo().click()
+                time.sleep(4)
+                break
