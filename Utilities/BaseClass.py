@@ -3,9 +3,12 @@ import inspect
 import pytest
 import logging
 
+from selenium.webdriver.common.by import By
+
 
 @pytest.mark.usefixtures("setup_chrome_browser")
 class BaseClass:
+
     pass
     # def test_logging_demo(self):
     #     logger_name = inspect.stack()[1][3]
