@@ -21,3 +21,4 @@ class Deals:
 
     def get_brand_page_logo(self):
         return self.driver.find_element(*Deals.brand_logo)
+

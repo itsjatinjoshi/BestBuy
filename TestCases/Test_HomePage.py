@@ -16,6 +16,7 @@ class TestBestBuyHome(BaseClass):
     def test_home_page(self):
         home = Home(self.driver)
         # home.get_home_page_logo().click()
+        self.best_buy_home_logo("a[class='logoLink_1bLeM']")
         home.get_shop_link().click()
 
         shop_link = home.get_shop_sub_link()
@@ -30,7 +31,8 @@ class TestBestBuyHome(BaseClass):
                 assert output == "Appliances"
                 break
 
-        home.get_home_page_logo().click()
+        # home.get_home_page_logo().click()
+        self.best_buy_home_logo("a[class='logoLink_1bLeM']")
         time.sleep(4)
 
     def test_brand_page(self):
@@ -62,7 +64,8 @@ class TestBestBuyHome(BaseClass):
                         assert "Samsung" == output
                         break
 
-                brand_page.get_brand_page_logo().click()
+                # brand_page.get_brand_page_logo().click()
+                self.best_buy_home_logo("a[class='logoLink_1bLeM']")
                 time.sleep(4)
                 break
 
@@ -78,7 +81,8 @@ class TestBestBuyHome(BaseClass):
         deals_page_text = deals.get_hot_deals_text().text
 
         assert deals_page_text == "Hot Deals"
-        deals.get_brand_page_logo().click()
+        self.best_buy_home_logo("a[class='logoLink_1bLeM']")
+        # deals.get_brand_page_logo().click()
         time.sleep(4)
 
     def test_account(self):
